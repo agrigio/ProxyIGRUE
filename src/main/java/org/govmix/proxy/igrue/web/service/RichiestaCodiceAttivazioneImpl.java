@@ -45,6 +45,7 @@ public class RichiestaCodiceAttivazioneImpl implements IRichiestaCodiceAttivazio
 		IgrueUtils igrueUtils = new IgrueUtils();
 		try {
 			in.setCredenziali(credenziali);
+			in.setProtocollo(10);
 			client = igrueUtils.getTrasmissioneClient();
 			out = client.assegnazioneCodProcAtt(in);
 		} catch (Exception e1) {

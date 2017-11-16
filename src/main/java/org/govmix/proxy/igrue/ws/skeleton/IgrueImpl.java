@@ -306,6 +306,7 @@ public class IgrueImpl implements Igrue {
 	}
 
 	public void getCodiceProceduraAttivazione(Credenziali credenziali,
+//			Holder<Integer> protocollo,
 			Holder<XMLGregorianCalendar> dataAssegnazione,
 			Holder<String> idAmministrazione,
 			Holder<String> idProceduraAttivazione, Holder<Integer> idSistema) {
@@ -322,6 +323,7 @@ public class IgrueImpl implements Igrue {
 			c.setIdSistema(credenziali.getIdSistema());
 			c.setPassword(credenziali.getPassword());
 			in.setCredenziali(c);
+			in.setProtocollo(10);
 
 			IgrueUtils igrueUtils = new IgrueUtils();
 			it.eng.csp.webservices.Trasmissione client = igrueUtils.getTrasmissioneClient();

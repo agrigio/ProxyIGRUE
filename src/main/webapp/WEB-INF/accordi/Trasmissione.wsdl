@@ -1,224 +1,288 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
-	xmlns:s1="http://trasmissione.messages.webservices.csp.mef.it"
-	xmlns:tns="http://webservices.csp.eng.it" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
-	xmlns:tns2="http://trasmissione.messages.webservices.csp.mef.it"
-	xmlns:tns3="http://messages.webservices.csp.mef.it" xmlns:tns4="http://dto.webservices.csp.mef.it"
-	targetNamespace="http://webservices.csp.eng.it">
-	<types>
-		<xsd:schema targetNamespace="http://messages.webservices.csp.mef.it">
-			<xsd:import namespace="http://dto.webservices.csp.mef.it" />
-			<xsd:complexType name="GenericInMessage">
-				<xsd:sequence>
-					<xsd:element name="credenziali" nillable="true"
-						type="tns4:Credenziali" />
-				</xsd:sequence>
-			</xsd:complexType>
-			<xsd:complexType name="GenericOutMessage">
-				<xsd:sequence>
-					<xsd:element name="esitoOperazione" nillable="true"
-						type="tns4:EsitoOperazione" />
-				</xsd:sequence>
-			</xsd:complexType>
-			<xsd:complexType name="GenericTicketInMessage">
-				<xsd:complexContent>
-					<xsd:extension base="tns3:GenericInMessage">
-						<xsd:sequence>
-							<xsd:element name="ticket" nillable="true" type="tns4:Ticket" />
-						</xsd:sequence>
-					</xsd:extension>
-				</xsd:complexContent>
-			</xsd:complexType>
-		</xsd:schema>
-		<xsd:schema targetNamespace="http://dto.webservices.csp.mef.it">
-			<xsd:complexType name="Credenziali">
-				<xsd:sequence>
-					<xsd:element name="idAmministrazione" nillable="true"
-						type="xsd:string" />
-					<xsd:element name="idSistema" type="xsd:int" />
-					<xsd:element name="password" nillable="true" type="xsd:string" />
-				</xsd:sequence>
-			</xsd:complexType>
-			<xsd:complexType name="EsitoOperazione">
-				<xsd:sequence>
-					<xsd:element name="codiceEsito" type="xsd:int" />
-					<xsd:element name="descrizioneEsito" nillable="true"
-						type="xsd:string" />
-					<xsd:element name="dettaglio" nillable="true" type="xsd:string" />
-					<xsd:element name="timeStamp" nillable="true" type="xsd:dateTime" />
-				</xsd:sequence>
-			</xsd:complexType>
-			<xsd:complexType name="Ticket">
-				<xsd:sequence>
-					<xsd:element name="dataAssegnazione" nillable="true"
-						type="xsd:dateTime" />
-					<xsd:element name="dataFineTrasmissione" nillable="true"
-						type="xsd:dateTime" />
-					<xsd:element name="fileRicevuto" type="xsd:boolean" />
-					<xsd:element name="idAmministrazione" nillable="true"
-						type="xsd:string" />
-					<xsd:element name="idSistema" type="xsd:int" />
-					<xsd:element name="idTicket" type="xsd:long" />
-				</xsd:sequence>
-			</xsd:complexType>
-			<xsd:complexType name="CodiceProceduraAttivazione">
-				<xsd:sequence>
-					<xsd:element name="dataAssegnazione" nillable="true"
-						type="xsd:dateTime" />
-					<xsd:element name="idAmministrazione" nillable="true"
-						type="xsd:string" />
-					<xsd:element name="idProceduraAttivazione" nillable="true"
-						type="xsd:string" />
-					<xsd:element name="idSistema" type="xsd:int" />
-				</xsd:sequence>
-			</xsd:complexType>
-		</xsd:schema>
-		<xsd:schema targetNamespace="http://trasmissione.messages.webservices.csp.mef.it">
-			<xsd:import namespace="http://dto.webservices.csp.mef.it" />
-			<xsd:import namespace="http://messages.webservices.csp.mef.it" />
-			<xsd:complexType name="PrenotazioneTrasmissioneIn">
-				<xsd:complexContent>
-					<xsd:extension base="tns3:GenericInMessage">
-						<xsd:sequence />
-					</xsd:extension>
-				</xsd:complexContent>
-			</xsd:complexType>
-			<xsd:element name="PrenotazioneTrasmissioneIn" nillable="true"
-				type="tns2:PrenotazioneTrasmissioneIn" />
-			<xsd:complexType name="PrenotazioneTrasmissioneOut">
-				<xsd:complexContent>
-					<xsd:extension base="tns3:GenericOutMessage">
-						<xsd:sequence>
-							<xsd:element name="ticket" nillable="true" type="tns4:Ticket" />
-						</xsd:sequence>
-					</xsd:extension>
-				</xsd:complexContent>
-			</xsd:complexType>
-			<xsd:element name="PrenotazioneTrasmissioneOut" nillable="true"
-				type="tns2:PrenotazioneTrasmissioneOut" />
-			<xsd:complexType name="AssegnazioneCodProcAttIn">
-				<xsd:complexContent>
-					<xsd:extension base="tns3:GenericInMessage">
-						<xsd:sequence />
-					</xsd:extension>
-				</xsd:complexContent>
-			</xsd:complexType>
-			<xsd:element name="AssegnazioneCodProcAttIn" nillable="true"
-				type="tns2:AssegnazioneCodProcAttIn" />
-			<xsd:complexType name="AssegnazioneCodProcAttOut">
-				<xsd:complexContent>
-					<xsd:extension base="tns3:GenericOutMessage">
-						<xsd:sequence>
-							<xsd:element name="codiceProceduraAttivazione"
-								nillable="true" type="tns4:CodiceProceduraAttivazione" />
-						</xsd:sequence>
-					</xsd:extension>
-				</xsd:complexContent>
-			</xsd:complexType>
-			<xsd:element name="AssegnazioneCodProcAttOut" nillable="true"
-				type="tns2:AssegnazioneCodProcAttOut" />
-			<xsd:complexType name="InviaFileIn">
-				<xsd:complexContent>
-					<xsd:extension base="tns3:GenericTicketInMessage">
-						<xsd:sequence />
-					</xsd:extension>
-				</xsd:complexContent>
-			</xsd:complexType>
-			<xsd:element name="InviaFileIn" nillable="true"
-				type="tns2:InviaFileIn" />
-			<xsd:complexType name="InviaFileOut">
-				<xsd:complexContent>
-					<xsd:extension base="tns3:GenericOutMessage">
-						<xsd:sequence />
-					</xsd:extension>
-				</xsd:complexContent>
-			</xsd:complexType>
-			<xsd:element name="InviaFileOut" nillable="true"
-				type="tns2:InviaFileOut" />
-			<xsd:complexType name="Content">
-				<xsd:attribute name="href" type="xsd:anyURI" />
-			</xsd:complexType>
-		</xsd:schema>
-	</types>
-	<message name="prenotazioneTrasmissioneRequest">
-		<part name="inMessage" type="s1:PrenotazioneTrasmissioneIn" />
-	</message>
-	<message name="assegnazioneCodProcAttRequest">
-		<part name="inMessage" type="s1:AssegnazioneCodProcAttIn" />
-	</message>
-	<message name="prenotazioneTrasmissioneResponse">
-		<part name="prenotazioneTrasmissioneReturn" type="s1:PrenotazioneTrasmissioneOut" />
-	</message>
-	<message name="inviaFileResponse">
-		<part name="inviaFileReturn" type="s1:InviaFileOut" />
-	</message>
-	<message name="assegnazioneCodProcAttResponse">
-		<part name="assegnazioneCodProcAttReturn" type="s1:AssegnazioneCodProcAttOut" />
-	</message>
-	<message name="inviaFileRequest">
-		<part name="inMessage" type="s1:InviaFileIn" />
-		<part name="content" type="xsd:base64Binary" />
-	</message>
-	<portType name="Trasmissione">
-		<operation name="prenotazioneTrasmissione" parameterOrder="inMessage">
-			<input message="tns:prenotazioneTrasmissioneRequest" name="prenotazioneTrasmissioneRequest" />
-			<output message="tns:prenotazioneTrasmissioneResponse" name="prenotazioneTrasmissioneResponse" />
-		</operation>
-		<operation name="assegnazioneCodProcAtt" parameterOrder="inMessage">
-			<input message="tns:assegnazioneCodProcAttRequest" name="assegnazioneCodProcAttRequest" />
-			<output message="tns:assegnazioneCodProcAttResponse" name="assegnazioneCodProcAttResponse" />
-		</operation>
-		<operation name="inviaFile">
-			<input message="tns:inviaFileRequest" name="inviaFileRequest" />
-			<output message="tns:inviaFileResponse" name="inviaFileResponse" />
-		</operation>
-	</portType>
-	<binding name="TrasmissioneSoapBinding" type="tns:Trasmissione">
-		<wsaw:UsingAddressing xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
-			xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" wsdl:required="false" />
-		<soap:binding style="rpc"
-			transport="http://schemas.xmlsoap.org/soap/http" />
-		<operation name="prenotazioneTrasmissione">
-			<soap:operation soapAction="prenotazioneTrasmissione" />
-			<input name="prenotazioneTrasmissioneRequest">
-				<soap:body namespace="http://webservices.csp.eng.it" use="literal" />
-			</input>
-			<output name="prenotazioneTrasmissioneResponse">
-				<soap:body namespace="http://webservices.csp.eng.it" use="literal" />
-			</output>
-		</operation>
-		<operation name="assegnazioneCodProcAtt">
-			<soap:operation soapAction="assegnazioneCodProcAtt" />
-			<input name="assegnazioneCodProcAttRequest">
-				<soap:body namespace="http://webservices.csp.eng.it" use="literal" />
-			</input>
-			<output name="assegnazioneCodProcAttResponse">
-				<soap:body namespace="http://webservices.csp.eng.it" use="literal" />
-			</output>
-		</operation>
-		<operation name="inviaFile">
-			<soap:operation soapAction="inviaFile" />
-			<input name="inviaFileRequest">
-				<mime:multipartRelated>
-					<mime:part>
-						<soap:body namespace="http://webservices.csp.eng.it"
-							use="literal" />
-					</mime:part>
-					<mime:part>
-						<mime:content part="content" type="application/zip" />
-					</mime:part>
-				</mime:multipartRelated>
-			</input>
-			<output name="inviaFileResponse">
-				<soap:body namespace="http://webservices.csp.eng.it" use="literal" />
-			</output>
-		</operation>
-	</binding>
-	<service name="TrasmissioneSoapBindingQSService">
-		<port binding="tns:TrasmissioneSoapBinding" name="TrasmissioneSoapBindingQSPort">
-			<soap:address
-				location="https://MinisteroEconomiaFinanze.spcoop.gov.it/openspcoop/PA/MEF/IGRUE_COLLOQUIOSISTEMILOCALI_TRASMISSIONE_1" />
-		</port>
-	</service>
-</definitions>
+<wsdl:definitions targetNamespace="http://webservices.csp.eng.it" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://webservices.csp.eng.it" xmlns:intf="http://webservices.csp.eng.it" xmlns:tns1="http://trasmissione.messages.webservices.csp.mef.it" xmlns:tns2="http://messages.webservices.csp.mef.it" xmlns:tns3="http://dto.webservices.csp.mef.it" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema targetNamespace="http://dto.webservices.csp.mef.it" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://messages.webservices.csp.mef.it"/>
+   <import namespace="http://xml.apache.org/xml-soap"/>
+   <import namespace="http://trasmissione.messages.webservices.csp.mef.it"/>
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="Credenziali">
+    <sequence>
+     <element name="idAmministrazione" nillable="true" type="xsd:string"/>
+     <element name="idSistema" type="xsd:int"/>
+     <element name="password" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="EsitoOperazione">
+    <sequence>
+     <element name="codiceEsito" type="xsd:int"/>
+     <element name="descrizioneEsito" nillable="true" type="xsd:string"/>
+     <element name="dettaglio" nillable="true" type="xsd:string"/>
+     <element name="timeStamp" nillable="true" type="xsd:dateTime"/>
+    </sequence>
+   </complexType>
+   <complexType name="Ticket">
+    <sequence>
+     <element name="dataAssegnazione" nillable="true" type="xsd:dateTime"/>
+     <element name="dataFineTrasmissione" nillable="true" type="xsd:dateTime"/>
+     <element name="fileRicevuto" type="xsd:boolean"/>
+     <element name="idAmministrazione" nillable="true" type="xsd:string"/>
+     <element name="idSistema" type="xsd:int"/>
+     <element name="idTicket" type="xsd:long"/>
+    </sequence>
+   </complexType>
+   <complexType name="CodiceProceduraAttivazione">
+    <sequence>
+     <element name="dataAssegnazione" nillable="true" type="xsd:dateTime"/>
+     <element name="idAmministrazione" nillable="true" type="xsd:string"/>
+     <element name="idProceduraAttivazione" nillable="true" type="xsd:string"/>
+     <element name="idSistema" type="xsd:int"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema targetNamespace="http://messages.webservices.csp.mef.it" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://xml.apache.org/xml-soap"/>
+   <import namespace="http://trasmissione.messages.webservices.csp.mef.it"/>
+   <import namespace="http://dto.webservices.csp.mef.it"/>
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="GenericInMessage">
+    <sequence>
+     <element name="credenziali" nillable="true" type="tns3:Credenziali"/>
+    </sequence>
+   </complexType>
+   <complexType name="GenericOutMessage">
+    <sequence>
+     <element name="esitoOperazione" nillable="true" type="tns3:EsitoOperazione"/>
+    </sequence>
+   </complexType>
+   <complexType name="GenericTicketInMessage">
+    <complexContent>
+     <extension base="tns2:GenericInMessage">
+      <sequence>
+       <element name="ticket" nillable="true" type="tns3:Ticket"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+  </schema>
+  <schema targetNamespace="http://trasmissione.messages.webservices.csp.mef.it" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://messages.webservices.csp.mef.it"/>
+   <import namespace="http://xml.apache.org/xml-soap"/>
+   <import namespace="http://dto.webservices.csp.mef.it"/>
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="PrenotazioneTrasmissioneIn">
+    <complexContent>
+     <extension base="tns2:GenericInMessage">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="PrenotazioneTrasmissioneOut">
+    <complexContent>
+     <extension base="tns2:GenericOutMessage">
+      <sequence>
+       <element name="ticket" nillable="true" type="tns3:Ticket"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="AssegnazioneCodProcAttIn">
+    <complexContent>
+     <extension base="tns2:GenericInMessage">
+      <sequence>
+       <element name="protocollo" nillable="true" type="xsd:int"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="AssegnazioneCodProcAttOut">
+    <complexContent>
+     <extension base="tns2:GenericOutMessage">
+      <sequence>
+       <element name="codiceProceduraAttivazione" nillable="true" type="tns3:CodiceProceduraAttivazione"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="InviaFileIn">
+    <complexContent>
+     <extension base="tns2:GenericTicketInMessage">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="InviaFileOut">
+    <complexContent>
+     <extension base="tns2:GenericOutMessage">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="prenotazioneTrasmissioneRequest">
+
+      <wsdl:part name="inMessage" type="tns1:PrenotazioneTrasmissioneIn">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="assegnazioneCodProcAttRequest">
+
+      <wsdl:part name="inMessage" type="tns1:AssegnazioneCodProcAttIn">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="inviaFileResponse">
+
+      <wsdl:part name="inviaFileReturn" type="tns1:InviaFileOut">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="prenotazioneTrasmissioneResponse">
+
+      <wsdl:part name="prenotazioneTrasmissioneReturn" type="tns1:PrenotazioneTrasmissioneOut">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="assegnazioneCodProcAttResponse">
+
+      <wsdl:part name="assegnazioneCodProcAttReturn" type="tns1:AssegnazioneCodProcAttOut">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="inviaFileRequest">
+
+      <wsdl:part name="inMessage" type="tns1:InviaFileIn">
+
+      </wsdl:part>
+
+      <wsdl:part name="content" type="apachesoap:DataHandler">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="Trasmissione">
+
+      <wsdl:operation name="prenotazioneTrasmissione" parameterOrder="inMessage">
+
+         <wsdl:input message="impl:prenotazioneTrasmissioneRequest" name="prenotazioneTrasmissioneRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:prenotazioneTrasmissioneResponse" name="prenotazioneTrasmissioneResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="assegnazioneCodProcAtt" parameterOrder="inMessage">
+
+         <wsdl:input message="impl:assegnazioneCodProcAttRequest" name="assegnazioneCodProcAttRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:assegnazioneCodProcAttResponse" name="assegnazioneCodProcAttResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="inviaFile" parameterOrder="inMessage content">
+
+         <wsdl:input message="impl:inviaFileRequest" name="inviaFileRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:inviaFileResponse" name="inviaFileResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="TrasmissioneSoapBinding" type="impl:Trasmissione">
+
+      <wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="prenotazioneTrasmissione">
+
+         <wsdlsoap:operation soapAction="prenotazioneTrasmissione"/>
+
+         <wsdl:input name="prenotazioneTrasmissioneRequest">
+
+            <wsdlsoap:body namespace="http://webservices.csp.eng.it" use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="prenotazioneTrasmissioneResponse">
+
+            <wsdlsoap:body namespace="http://webservices.csp.eng.it" use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="assegnazioneCodProcAtt">
+
+         <wsdlsoap:operation soapAction="assegnazioneCodProcAtt"/>
+
+         <wsdl:input name="assegnazioneCodProcAttRequest">
+
+            <wsdlsoap:body namespace="http://webservices.csp.eng.it" use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="assegnazioneCodProcAttResponse">
+
+            <wsdlsoap:body namespace="http://webservices.csp.eng.it" use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="inviaFile">
+
+         <wsdlsoap:operation soapAction="inviaFile"/>
+
+         <wsdl:input name="inviaFileRequest">
+
+            <wsdlsoap:body namespace="http://webservices.csp.eng.it" use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="inviaFileResponse">
+
+            <wsdlsoap:body namespace="http://webservices.csp.eng.it" use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="TrasmissioneService">
+
+      <wsdl:port binding="impl:TrasmissioneSoapBinding" name="Trasmissione">
+
+         <wsdlsoap:address location="http://igruesrv.tesoro.it/CPSWeb/services/Trasmissione"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

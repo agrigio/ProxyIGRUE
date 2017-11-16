@@ -1,218 +1,227 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<s0:definitions xmlns:s0="http://schemas.xmlsoap.org/wsdl/"
-	xmlns:s1="http://tipologie.messages.webservices.csp.mef.it" xmlns:s2="http://www.w3.org/2001/XMLSchema"
-	xmlns:s3="http://webservices.csp.eng.it" xmlns:s4="http://schemas.xmlsoap.org/wsdl/soap/"
-	xmlns:s5="http://schemas.xmlsoap.org/wsdl/mime/" targetNamespace="http://webservices.csp.eng.it">
-	<s0:types>
-		<s2:schema xmlns:s2="http://www.w3.org/2001/XMLSchema"
-			xmlns="http://www.w3.org/2001/XMLSchema" xmlns:impl="http://webservices.csp.eng.it"
-			xmlns:intf="http://webservices.csp.eng.it" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
-			xmlns:s0="http://schemas.xmlsoap.org/wsdl/" xmlns:s1="http://tipologie.messages.webservices.csp.mef.it"
-			xmlns:s3="http://webservices.csp.eng.it" xmlns:s4="http://schemas.xmlsoap.org/wsdl/soap/"
-			xmlns:s5="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns2="http://tipologie.messages.webservices.csp.mef.it"
-			xmlns:tns3="http://messages.webservices.csp.mef.it" xmlns:tns4="http://dto.webservices.csp.mef.it"
-			xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
-			xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsi="http://ws-i.org/profiles/basic/1.1/xsd"
-			xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://messages.webservices.csp.mef.it">
-			<s2:import namespace="http://dto.webservices.csp.mef.it" />
-			<s2:complexType name="GenericInMessage">
-				<s2:sequence>
-					<s2:element name="credenziali" nillable="true"
-						type="tns4:Credenziali" />
-				</s2:sequence>
-			</s2:complexType>
-			<s2:complexType name="GenericOutMessage">
-				<s2:sequence>
-					<s2:element name="esitoOperazione" nillable="true"
-						type="tns4:EsitoOperazione" />
-				</s2:sequence>
-			</s2:complexType>
-		</s2:schema>
-		<s2:schema xmlns:s2="http://www.w3.org/2001/XMLSchema"
-			xmlns="http://www.w3.org/2001/XMLSchema" xmlns:impl="http://webservices.csp.eng.it"
-			xmlns:intf="http://webservices.csp.eng.it" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
-			xmlns:s0="http://schemas.xmlsoap.org/wsdl/" xmlns:s1="http://tipologie.messages.webservices.csp.mef.it"
-			xmlns:s3="http://webservices.csp.eng.it" xmlns:s4="http://schemas.xmlsoap.org/wsdl/soap/"
-			xmlns:s5="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns2="http://tipologie.messages.webservices.csp.mef.it"
-			xmlns:tns3="http://messages.webservices.csp.mef.it" xmlns:tns4="http://dto.webservices.csp.mef.it"
-			xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
-			xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsi="http://ws-i.org/profiles/basic/1.1/xsd"
-			xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://dto.webservices.csp.mef.it">
-			<s2:complexType name="Credenziali">
-				<s2:sequence>
-					<s2:element name="idAmministrazione" nillable="true"
-						type="xsd:string" />
-					<s2:element name="idSistema" type="xsd:int" />
-					<s2:element name="password" nillable="true" type="xsd:string" />
-				</s2:sequence>
-			</s2:complexType>
-			<s2:complexType name="EsitoOperazione">
-				<s2:sequence>
-					<s2:element name="codiceEsito" type="xsd:int" />
-					<s2:element name="descrizioneEsito" nillable="true"
-						type="xsd:string" />
-					<s2:element name="dettaglio" nillable="true" type="xsd:string" />
-					<s2:element name="timeStamp" nillable="true" type="xsd:dateTime" />
-				</s2:sequence>
-			</s2:complexType>
-		</s2:schema>
-		<s2:schema xmlns:s2="http://www.w3.org/2001/XMLSchema"
-			xmlns="http://www.w3.org/2001/XMLSchema" xmlns:impl="http://webservices.csp.eng.it"
-			xmlns:intf="http://webservices.csp.eng.it" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
-			xmlns:s0="http://schemas.xmlsoap.org/wsdl/" xmlns:s1="http://tipologie.messages.webservices.csp.mef.it"
-			xmlns:s3="http://webservices.csp.eng.it" xmlns:s4="http://schemas.xmlsoap.org/wsdl/soap/"
-			xmlns:s5="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns2="http://tipologie.messages.webservices.csp.mef.it"
-			xmlns:tns3="http://messages.webservices.csp.mef.it" xmlns:tns4="http://dto.webservices.csp.mef.it"
-			xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
-			xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsi="http://ws-i.org/profiles/basic/1.1/xsd"
-			xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://webservices.csp.eng.it">
-			<s2:complexType name="ArrayOf_xsd_nillable_string">
-				<s2:sequence>
-					<s2:element maxOccurs="unbounded" minOccurs="0" name="string"
-						nillable="true" type="xsd:string" />
-				</s2:sequence>
-			</s2:complexType>
-		</s2:schema>
-		<s2:schema xmlns:s2="http://www.w3.org/2001/XMLSchema"
-			xmlns="http://www.w3.org/2001/XMLSchema" xmlns:impl="http://webservices.csp.eng.it"
-			xmlns:intf="http://webservices.csp.eng.it" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
-			xmlns:s0="http://schemas.xmlsoap.org/wsdl/" xmlns:s1="http://tipologie.messages.webservices.csp.mef.it"
-			xmlns:s3="http://webservices.csp.eng.it" xmlns:s4="http://schemas.xmlsoap.org/wsdl/soap/"
-			xmlns:s5="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns2="http://tipologie.messages.webservices.csp.mef.it"
-			xmlns:tns3="http://messages.webservices.csp.mef.it" xmlns:tns4="http://dto.webservices.csp.mef.it"
-			xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
-			xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsi="http://ws-i.org/profiles/basic/1.1/xsd"
-			xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://tipologie.messages.webservices.csp.mef.it">
-			<s2:import namespace="http://webservices.csp.eng.it" />
-			<s2:import namespace="http://messages.webservices.csp.mef.it" />
-			<s2:complexType name="AllDatiContestoIn">
-				<s2:complexContent>
-					<s2:extension base="tns3:GenericInMessage">
-						<s2:sequence />
-					</s2:extension>
-				</s2:complexContent>
-			</s2:complexType>
-			<s2:element name="AllDatiContestoIn" nillable="true"
-				type="tns2:AllDatiContestoIn" />
-			<s2:complexType name="AllDatiContestoOut">
-				<s2:complexContent>
-					<s2:extension base="tns3:GenericOutMessage">
-						<s2:sequence />
-					</s2:extension>
-				</s2:complexContent>
-			</s2:complexType>
-			<s2:element name="AllDatiContestoOut" nillable="true"
-				type="tns2:AllDatiContestoOut" />
-			<s2:complexType name="DatiContestoPerTipologiaIn">
-				<s2:complexContent>
-					<s2:extension base="tns3:GenericInMessage">
-						<s2:sequence>
-							<s2:element name="idTipologieRichieste" nillable="true"
-								type="impl:ArrayOf_xsd_nillable_string" />
-						</s2:sequence>
-					</s2:extension>
-				</s2:complexContent>
-			</s2:complexType>
-			<s2:element name="DatiContestoPerTipologiaIn" nillable="true"
-				type="tns2:DatiContestoPerTipologiaIn" />
-			<s2:complexType name="DatiContestoPerTipologiaOut">
-				<s2:complexContent>
-					<s2:extension base="tns3:GenericOutMessage">
-						<s2:sequence />
-					</s2:extension>
-				</s2:complexContent>
-			</s2:complexType>
-			<s2:element name="DatiContestoPerTipologiaOut" nillable="true"
-				type="tns2:DatiContestoPerTipologiaOut" />
-			<s2:complexType name="Content">
-				<s2:attribute name="href" type="xsd:anyURI" />
-			</s2:complexType>
-		</s2:schema>
+<wsdl:definitions targetNamespace="http://webservices.csp.eng.it" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://webservices.csp.eng.it" xmlns:intf="http://webservices.csp.eng.it" xmlns:tns1="http://tipologie.messages.webservices.csp.mef.it" xmlns:tns2="http://messages.webservices.csp.mef.it" xmlns:tns3="http://dto.webservices.csp.mef.it" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema targetNamespace="http://dto.webservices.csp.mef.it" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://tipologie.messages.webservices.csp.mef.it"/>
+   <import namespace="http://messages.webservices.csp.mef.it"/>
+   <import namespace="http://xml.apache.org/xml-soap"/>
+   <import namespace="http://webservices.csp.eng.it"/>
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="Credenziali">
+    <sequence>
+     <element name="idAmministrazione" nillable="true" type="xsd:string"/>
+     <element name="idSistema" type="xsd:int"/>
+     <element name="password" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="EsitoOperazione">
+    <sequence>
+     <element name="codiceEsito" type="xsd:int"/>
+     <element name="descrizioneEsito" nillable="true" type="xsd:string"/>
+     <element name="dettaglio" nillable="true" type="xsd:string"/>
+     <element name="timeStamp" nillable="true" type="xsd:dateTime"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema targetNamespace="http://messages.webservices.csp.mef.it" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://tipologie.messages.webservices.csp.mef.it"/>
+   <import namespace="http://xml.apache.org/xml-soap"/>
+   <import namespace="http://dto.webservices.csp.mef.it"/>
+   <import namespace="http://webservices.csp.eng.it"/>
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="GenericInMessage">
+    <sequence>
+     <element name="credenziali" nillable="true" type="tns3:Credenziali"/>
+    </sequence>
+   </complexType>
+   <complexType name="GenericOutMessage">
+    <sequence>
+     <element name="esitoOperazione" nillable="true" type="tns3:EsitoOperazione"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema targetNamespace="http://tipologie.messages.webservices.csp.mef.it" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://messages.webservices.csp.mef.it"/>
+   <import namespace="http://xml.apache.org/xml-soap"/>
+   <import namespace="http://dto.webservices.csp.mef.it"/>
+   <import namespace="http://webservices.csp.eng.it"/>
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="AllDatiContestoIn">
+    <complexContent>
+     <extension base="tns2:GenericInMessage">
+      <sequence>
+       <element name="protocollo" nillable="true" type="xsd:int"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="AllDatiContestoOut">
+    <complexContent>
+     <extension base="tns2:GenericOutMessage">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="DatiContestoPerTipologiaIn">
+    <complexContent>
+     <extension base="tns2:GenericInMessage">
+      <sequence>
+       <element name="idTipologieRichieste" nillable="true" type="impl:ArrayOf_xsd_nillable_string"/>
+       <element name="protocollo" nillable="true" type="xsd:int"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="DatiContestoPerTipologiaOut">
+    <complexContent>
+     <extension base="tns2:GenericOutMessage">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+  </schema>
+  <schema targetNamespace="http://webservices.csp.eng.it" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://tipologie.messages.webservices.csp.mef.it"/>
+   <import namespace="http://messages.webservices.csp.mef.it"/>
+   <import namespace="http://xml.apache.org/xml-soap"/>
+   <import namespace="http://dto.webservices.csp.mef.it"/>
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="ArrayOf_xsd_nillable_string">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
 
-	</s0:types>
-	<s0:message name="datiContestoPerTipologiaResponse">
-		<s0:part name="datiContestoPerTipologiaReturn" type="s1:DatiContestoPerTipologiaOut" />
-		<s0:part name="content" type="s2:base64Binary" />
-	</s0:message>
-	<s0:message name="allDatiContestoResponse">
-		<s0:part name="allDatiContestoReturn" type="s1:AllDatiContestoOut" />
-		<s0:part name="content" type="s2:base64Binary" />
-	</s0:message>
-	<s0:message name="datiContestoPerTipologiaRequest">
-		<s0:part name="inMessage" type="s1:DatiContestoPerTipologiaIn" />
-		<s0:part name="content" type="s2:base64Binary" />
-	</s0:message>
-	<s0:message name="allDatiContestoRequest">
-		<s0:part name="inMessage" type="s1:AllDatiContestoIn" />
-		<s0:part name="content" type="s2:base64Binary" />
-	</s0:message>
-	<s0:portType name="Tipologie">
-		<s0:operation name="allDatiContesto">
-			<s0:input message="s3:allDatiContestoRequest" name="allDatiContestoRequest" />
-			<s0:output message="s3:allDatiContestoResponse" name="allDatiContestoResponse" />
-		</s0:operation>
-		<s0:operation name="datiContestoPerTipologia">
-			<s0:input message="s3:datiContestoPerTipologiaRequest" name="datiContestoPerTipologiaRequest" />
-			<s0:output message="s3:datiContestoPerTipologiaResponse"
-				name="datiContestoPerTipologiaResponse" />
-		</s0:operation>
-	</s0:portType>
+   <wsdl:message name="datiContestoPerTipologiaResponse">
 
-	<s0:binding name="TipologieSoapBinding" type="s3:Tipologie">
-		<wsaw:UsingAddressing xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
-			xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" wsdl:required="false" />
-		<s4:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http" />
-		<s0:operation name="allDatiContesto">
-			<s4:operation soapAction="allDatiContesto" />
-			<s0:input name="allDatiContestoRequest">
-				<s5:multipartRelated>
-					<s5:part>
-						<s4:body namespace="http://webservices.csp.eng.it" use="literal" />
-					</s5:part>
-					<s5:part>
-						<s5:content part="content" type="application/zip" />
-					</s5:part>
-				</s5:multipartRelated>
-			</s0:input>
-			<s0:output name="allDatiContestoResponse">
-				<s5:multipartRelated>
-					<s5:part>
-						<s4:body namespace="http://webservices.csp.eng.it" use="literal" />
-					</s5:part>
-					<s5:part>
-						<s5:content part="content" type="application/zip" />
-					</s5:part>
-				</s5:multipartRelated>
-			</s0:output>
-		</s0:operation>
-		<s0:operation name="datiContestoPerTipologia">
-			<s4:operation soapAction="datiContestoPerTipologia" />
-			<s0:input name="datiContestoPerTipologiaRequest">
-				<s5:multipartRelated>
-					<s5:part>
-						<s4:body namespace="http://webservices.csp.eng.it" use="literal" />
-					</s5:part>
-					<s5:part>
-						<s5:content part="content" type="application/zip" />
-					</s5:part>
-				</s5:multipartRelated>
-			</s0:input>
-			<s0:output name="datiContestoPerTipologiaResponse">
-				<s5:multipartRelated>
-					<s5:part>
-						<s4:body namespace="http://webservices.csp.eng.it" use="literal" />
-					</s5:part>
-					<s5:part>
-						<s5:content part="content" type="application/zip" />
-					</s5:part>
-				</s5:multipartRelated>
-			</s0:output>
-		</s0:operation>
-	</s0:binding>
-	<s0:service name="TipologieSoapBindingQSService">
-		<s0:port binding="s3:TipologieSoapBinding" name="TipologieSoapBindingQSPort">
-			<s4:address
-				location="https://MinisteroEconomiaFinanze.spcoop.gov.it/openspcoop/PA/MEF/IGRUE_COLLOQUIOSISTEMILOCALI_TIPOLOGIE_1" />
-		</s0:port>
-	</s0:service>
-</s0:definitions>
+      <wsdl:part name="datiContestoPerTipologiaReturn" type="tns1:DatiContestoPerTipologiaOut">
+
+      </wsdl:part>
+
+      <wsdl:part name="content" type="apachesoap:DataHandler">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="allDatiContestoResponse">
+
+      <wsdl:part name="allDatiContestoReturn" type="tns1:AllDatiContestoOut">
+
+      </wsdl:part>
+
+      <wsdl:part name="content" type="apachesoap:DataHandler">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="datiContestoPerTipologiaRequest">
+
+      <wsdl:part name="inMessage" type="tns1:DatiContestoPerTipologiaIn">
+
+      </wsdl:part>
+
+      <wsdl:part name="content" type="apachesoap:DataHandler">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="allDatiContestoRequest">
+
+      <wsdl:part name="inMessage" type="tns1:AllDatiContestoIn">
+
+      </wsdl:part>
+
+      <wsdl:part name="content" type="apachesoap:DataHandler">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="Tipologie">
+
+      <wsdl:operation name="allDatiContesto" parameterOrder="inMessage content">
+
+         <wsdl:input message="impl:allDatiContestoRequest" name="allDatiContestoRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:allDatiContestoResponse" name="allDatiContestoResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="datiContestoPerTipologia" parameterOrder="inMessage content">
+
+         <wsdl:input message="impl:datiContestoPerTipologiaRequest" name="datiContestoPerTipologiaRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:datiContestoPerTipologiaResponse" name="datiContestoPerTipologiaResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="TipologieSoapBinding" type="impl:Tipologie">
+
+      <wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="allDatiContesto">
+
+         <wsdlsoap:operation soapAction="allDatiContesto"/>
+
+         <wsdl:input name="allDatiContestoRequest">
+
+            <wsdlsoap:body namespace="http://webservices.csp.eng.it" use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="allDatiContestoResponse">
+
+            <wsdlsoap:body namespace="http://webservices.csp.eng.it" use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="datiContestoPerTipologia">
+
+         <wsdlsoap:operation soapAction="datiContestoPerTipologia"/>
+
+         <wsdl:input name="datiContestoPerTipologiaRequest">
+
+            <wsdlsoap:body namespace="http://webservices.csp.eng.it" use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="datiContestoPerTipologiaResponse">
+
+            <wsdlsoap:body namespace="http://webservices.csp.eng.it" use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="TipologieService">
+
+      <wsdl:port binding="impl:TipologieSoapBinding" name="Tipologie">
+
+         <wsdlsoap:address location="http://igruesrv.tesoro.it/CPSWeb/services/Tipologie"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

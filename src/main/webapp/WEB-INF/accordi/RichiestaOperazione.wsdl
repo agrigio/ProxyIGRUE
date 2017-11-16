@@ -1,175 +1,228 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-	xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:wsi="http://ws-i.org/profiles/basic/1.1/xsd"
-	xmlns:tns="http://webservices.csp.eng.it" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-	xmlns:tns2="http://richiestaoperazione.messages.webservices.csp.mef.it"
-	xmlns:tns3="http://messages.webservices.csp.mef.it" xmlns:tns4="http://dto.webservices.csp.mef.it"
-	targetNamespace="http://webservices.csp.eng.it">
-	<types>
-		<xsd:schema targetNamespace="http://messages.webservices.csp.mef.it">
-			<xsd:import namespace="http://dto.webservices.csp.mef.it" />
-			<xsd:complexType name="GenericInMessage">
-				<xsd:sequence>
-					<xsd:element name="credenziali" nillable="true"
-						type="tns4:Credenziali" />
-				</xsd:sequence>
-			</xsd:complexType>
-			<xsd:complexType name="GenericOutMessage">
-				<xsd:sequence>
-					<xsd:element name="esitoOperazione" nillable="true"
-						type="tns4:EsitoOperazione" />
-				</xsd:sequence>
-			</xsd:complexType>
-		</xsd:schema>
-		<xsd:schema  targetNamespace="http://dto.webservices.csp.mef.it">
-			<xsd:complexType name="Credenziali">
-				<xsd:sequence>
-					<xsd:element name="idAmministrazione" nillable="true"
-						type="xsd:string" />
-					<xsd:element name="idSistema" type="xsd:int" />
-					<xsd:element name="password" nillable="true" type="xsd:string" />
-				</xsd:sequence>
-			</xsd:complexType>
-			<xsd:complexType name="EsitoOperazione">
-				<xsd:sequence>
-					<xsd:element name="codiceEsito" type="xsd:int" />
-					<xsd:element name="descrizioneEsito" nillable="true"
-						type="xsd:string" />
-					<xsd:element name="dettaglio" nillable="true" type="xsd:string" />
-					<xsd:element name="timeStamp" nillable="true" type="xsd:dateTime" />
-				</xsd:sequence>
-			</xsd:complexType>
-			<xsd:complexType name="TipoOperazione">
-				<xsd:sequence>
-					<xsd:element name="codiceTipoOperazione" type="xsd:int" />
-					<xsd:element name="descrizioneTipoOperazione" nillable="true"
-						type="xsd:string" />
-				</xsd:sequence>
-			</xsd:complexType>
-			<xsd:complexType name="Property">
-				<xsd:sequence>
-					<xsd:element name="key" nillable="true" type="xsd:string" />
-					<xsd:element name="value" nillable="true" type="xsd:string" />
-				</xsd:sequence>
-			</xsd:complexType>
-		</xsd:schema>
-		<xsd:schema  targetNamespace="http://webservices.csp.eng.it">
-			<xsd:import namespace="http://dto.webservices.csp.mef.it" />
-			<xsd:complexType name="ArrayOf_tns4_nillable_TipoOperazione">
-				<xsd:sequence>
-					<xsd:element maxOccurs="unbounded" minOccurs="0"
-						name="TipoOperazione" nillable="true" type="tns4:TipoOperazione" />
-				</xsd:sequence>
-			</xsd:complexType>
-			<xsd:complexType name="ArrayOf_tns4_nillable_Property">
-				<xsd:sequence>
-					<xsd:element maxOccurs="unbounded" minOccurs="0" name="Property"
-						nillable="true" type="tns4:Property" />
-				</xsd:sequence>
-			</xsd:complexType>
-		</xsd:schema>
-		<xsd:schema  targetNamespace="http://richiestaoperazione.messages.webservices.csp.mef.it">
-			<xsd:import namespace="http://webservices.csp.eng.it" />
-			<xsd:import namespace="http://messages.webservices.csp.mef.it" />
-			<xsd:complexType name="ListaTipiOperazioneIn">
-				<xsd:complexContent>
-					<xsd:extension base="tns3:GenericInMessage">
-						<xsd:sequence />
-					</xsd:extension>
-				</xsd:complexContent>
-			</xsd:complexType>
-			<xsd:element name="ListaTipiOperazioneIn" nillable="true"
-				type="tns2:ListaTipiOperazioneIn" />
-			<xsd:complexType name="ListaTipiOperazioneOut">
-				<xsd:complexContent>
-					<xsd:extension base="tns3:GenericOutMessage">
-						<xsd:sequence>
-							<xsd:element name="tipiOperazione" nillable="true"
-								type="tns:ArrayOf_tns4_nillable_TipoOperazione" />
-						</xsd:sequence>
-					</xsd:extension>
-				</xsd:complexContent>
-			</xsd:complexType>
-			<xsd:element name="ListaTipiOperazioneOut" nillable="true"
-				type="tns2:ListaTipiOperazioneOut" />
-			<xsd:complexType name="RichiestaIn">
-				<xsd:complexContent>
-					<xsd:extension base="tns3:GenericInMessage">
-						<xsd:sequence>
-							<xsd:element name="altriParametri" nillable="true"
-								type="tns:ArrayOf_tns4_nillable_Property" />
-							<xsd:element name="codiceTipoOperazione" type="xsd:int" />
-							<xsd:element name="parametro" nillable="true" type="xsd:string" />
-						</xsd:sequence>
-					</xsd:extension>
-				</xsd:complexContent>
-			</xsd:complexType>
-			<xsd:element name="RichiestaIn" nillable="true"
-				type="tns2:RichiestaIn" />
-			<xsd:complexType name="RichiestaOut">
-				<xsd:complexContent>
-					<xsd:extension base="tns3:GenericOutMessage">
-						<xsd:sequence>
-							<xsd:element name="dataRichiestaOperazione" nillable="true"
-								type="xsd:dateTime" />
-							<xsd:element name="identificativoRichiesta" type="xsd:long" />
-						</xsd:sequence>
-					</xsd:extension>
-				</xsd:complexContent>
-			</xsd:complexType>
-			<xsd:element name="RichiestaOut" nillable="true"
-				type="tns2:RichiestaOut" />
-		</xsd:schema>
-	</types>
-	<message name="richiestaResponse">
-		<part name="richiestaReturn" type="tns2:RichiestaOut" />
-	</message>
-	<message name="richiestaRequest">
-		<part name="inMessage" type="tns2:RichiestaIn" />
-	</message>
-	<message name="listaTipiOperazioneResponse">
-		<part name="listaTipiOperazioneReturn" type="tns2:ListaTipiOperazioneOut" />
-	</message>
-	<message name="listaTipiOperazioneRequest">
-		<part name="inMessage" type="tns2:ListaTipiOperazioneIn" />
-	</message>
-	<portType name="RichiestaOperazione">
-		<operation name="listaTipiOperazione" parameterOrder="inMessage">
-			<input message="tns:listaTipiOperazioneRequest" name="listaTipiOperazioneRequest" />
-			<output message="tns:listaTipiOperazioneResponse" name="listaTipiOperazioneResponse" />
-		</operation>
-		<operation name="richiesta" parameterOrder="inMessage">
-			<input message="tns:richiestaRequest" name="richiestaRequest" />
-			<output message="tns:richiestaResponse" name="richiestaResponse" />
-		</operation>
-	</portType>
-	<binding name="RichiestaOperazioneSoapBinding" type="tns:RichiestaOperazione">
-		<wsaw:UsingAddressing xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
-			xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" wsdl:required="false" />
-		<soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http" />
-		<operation name="listaTipiOperazione">
-			<soap:operation soapAction="listaTipiOperazione" />
-			<input name="listaTipiOperazioneRequest">
-				<soap:body namespace="http://webservices.csp.eng.it" use="literal" />
-			</input>
-			<output name="listaTipiOperazioneResponse">
-				<soap:body namespace="http://webservices.csp.eng.it" use="literal" />
-			</output>
-		</operation>
-		<operation name="richiesta">
-			<soap:operation soapAction="richiesta" />
-			<input name="richiestaRequest">
-				<soap:body namespace="http://webservices.csp.eng.it" use="literal" />
-			</input>
-			<output name="richiestaResponse">
-				<soap:body namespace="http://webservices.csp.eng.it" use="literal" />
-			</output>
-		</operation>
-	</binding>
-	<service name="RichiestaOperazioneSoapBindingQSService">
-		<port binding="tns:RichiestaOperazioneSoapBinding" name="RichiestaOperazioneSoapBindingQSPort">
-			<soap:address
-				location="https://MinisteroEconomiaFinanze.spcoop.gov.it/openspcoop/PA/MEF/IGRUE_COLLOQUIOSISTEMILOCALI_RICHIESTAOPERAZIONE_1" />
-		</port>
-	</service>
-</definitions>
+<wsdl:definitions targetNamespace="http://webservices.csp.eng.it" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://webservices.csp.eng.it" xmlns:intf="http://webservices.csp.eng.it" xmlns:tns1="http://richiestaoperazione.messages.webservices.csp.mef.it" xmlns:tns2="http://messages.webservices.csp.mef.it" xmlns:tns3="http://dto.webservices.csp.mef.it" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema targetNamespace="http://dto.webservices.csp.mef.it" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://richiestaoperazione.messages.webservices.csp.mef.it"/>
+   <import namespace="http://messages.webservices.csp.mef.it"/>
+   <import namespace="http://webservices.csp.eng.it"/>
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="Credenziali">
+    <sequence>
+     <element name="idAmministrazione" nillable="true" type="xsd:string"/>
+     <element name="idSistema" type="xsd:int"/>
+     <element name="password" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="EsitoOperazione">
+    <sequence>
+     <element name="codiceEsito" type="xsd:int"/>
+     <element name="descrizioneEsito" nillable="true" type="xsd:string"/>
+     <element name="dettaglio" nillable="true" type="xsd:string"/>
+     <element name="timeStamp" nillable="true" type="xsd:dateTime"/>
+    </sequence>
+   </complexType>
+   <complexType name="TipoOperazione">
+    <sequence>
+     <element name="codiceTipoOperazione" type="xsd:int"/>
+     <element name="descrizioneTipoOperazione" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="Property">
+    <sequence>
+     <element name="key" nillable="true" type="xsd:string"/>
+     <element name="value" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema targetNamespace="http://messages.webservices.csp.mef.it" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://richiestaoperazione.messages.webservices.csp.mef.it"/>
+   <import namespace="http://dto.webservices.csp.mef.it"/>
+   <import namespace="http://webservices.csp.eng.it"/>
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="GenericInMessage">
+    <sequence>
+     <element name="credenziali" nillable="true" type="tns3:Credenziali"/>
+    </sequence>
+   </complexType>
+   <complexType name="GenericOutMessage">
+    <sequence>
+     <element name="esitoOperazione" nillable="true" type="tns3:EsitoOperazione"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema targetNamespace="http://richiestaoperazione.messages.webservices.csp.mef.it" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://messages.webservices.csp.mef.it"/>
+   <import namespace="http://dto.webservices.csp.mef.it"/>
+   <import namespace="http://webservices.csp.eng.it"/>
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="ListaTipiOperazioneIn">
+    <complexContent>
+     <extension base="tns2:GenericInMessage">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="ListaTipiOperazioneOut">
+    <complexContent>
+     <extension base="tns2:GenericOutMessage">
+      <sequence>
+       <element name="tipiOperazione" nillable="true" type="impl:ArrayOf_tns4_nillable_TipoOperazione"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="RichiestaIn">
+    <complexContent>
+     <extension base="tns2:GenericInMessage">
+      <sequence>
+       <element name="altriParametri" nillable="true" type="impl:ArrayOf_tns4_nillable_Property"/>
+       <element name="codiceTipoOperazione" type="xsd:int"/>
+       <element name="parametro" nillable="true" type="xsd:string"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="RichiestaOut">
+    <complexContent>
+     <extension base="tns2:GenericOutMessage">
+      <sequence>
+       <element name="dataRichiestaOperazione" nillable="true" type="xsd:dateTime"/>
+       <element name="identificativoRichiesta" type="xsd:long"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+  </schema>
+  <schema targetNamespace="http://webservices.csp.eng.it" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://richiestaoperazione.messages.webservices.csp.mef.it"/>
+   <import namespace="http://messages.webservices.csp.mef.it"/>
+   <import namespace="http://dto.webservices.csp.mef.it"/>
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="ArrayOf_tns4_nillable_TipoOperazione">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns3:TipoOperazione"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOf_tns4_nillable_Property">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns3:Property"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="richiestaResponse">
+
+      <wsdl:part name="richiestaReturn" type="tns1:RichiestaOut">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="richiestaRequest">
+
+      <wsdl:part name="inMessage" type="tns1:RichiestaIn">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="listaTipiOperazioneResponse">
+
+      <wsdl:part name="listaTipiOperazioneReturn" type="tns1:ListaTipiOperazioneOut">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="listaTipiOperazioneRequest">
+
+      <wsdl:part name="inMessage" type="tns1:ListaTipiOperazioneIn">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="RichiestaOperazione">
+
+      <wsdl:operation name="listaTipiOperazione" parameterOrder="inMessage">
+
+         <wsdl:input message="impl:listaTipiOperazioneRequest" name="listaTipiOperazioneRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:listaTipiOperazioneResponse" name="listaTipiOperazioneResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="richiesta" parameterOrder="inMessage">
+
+         <wsdl:input message="impl:richiestaRequest" name="richiestaRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:richiestaResponse" name="richiestaResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="RichiestaOperazioneSoapBinding" type="impl:RichiestaOperazione">
+
+      <wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="listaTipiOperazione">
+
+         <wsdlsoap:operation soapAction="listaTipiOperazione"/>
+
+         <wsdl:input name="listaTipiOperazioneRequest">
+
+            <wsdlsoap:body namespace="http://webservices.csp.eng.it" use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="listaTipiOperazioneResponse">
+
+            <wsdlsoap:body namespace="http://webservices.csp.eng.it" use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="richiesta">
+
+         <wsdlsoap:operation soapAction="richiesta"/>
+
+         <wsdl:input name="richiestaRequest">
+
+            <wsdlsoap:body namespace="http://webservices.csp.eng.it" use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="richiestaResponse">
+
+            <wsdlsoap:body namespace="http://webservices.csp.eng.it" use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="RichiestaOperazioneService">
+
+      <wsdl:port binding="impl:RichiestaOperazioneSoapBinding" name="RichiestaOperazione">
+
+         <wsdlsoap:address location="http://igruesrv.tesoro.it/CPSWeb/services/RichiestaOperazione"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

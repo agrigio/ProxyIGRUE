@@ -1,299 +1,335 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
-	xmlns:s1="http://gestioneeventi.messages.webservices.csp.mef.it"
-	xmlns:s2="http://webservices.csp.eng.it" xmlns:s3="http://schemas.xmlsoap.org/wsdl/soap/"
-	targetNamespace="http://webservices.csp.eng.it">
+<wsdl:definitions targetNamespace="http://webservices.csp.eng.it" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://webservices.csp.eng.it" xmlns:intf="http://webservices.csp.eng.it" xmlns:tns1="http://gestioneeventi.messages.webservices.csp.mef.it" xmlns:tns2="http://messages.webservices.csp.mef.it" xmlns:tns3="http://dto.webservices.csp.mef.it" xmlns:tns4="http://event.system.mef.it" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema targetNamespace="http://dto.webservices.csp.mef.it" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://gestioneeventi.messages.webservices.csp.mef.it"/>
+   <import namespace="http://messages.webservices.csp.mef.it"/>
+   <import namespace="http://webservices.csp.eng.it"/>
+   <import namespace="http://event.system.mef.it"/>
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="Credenziali">
+    <sequence>
+     <element name="idAmministrazione" nillable="true" type="xsd:string"/>
+     <element name="idSistema" type="xsd:int"/>
+     <element name="password" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="EsitoOperazione">
+    <sequence>
+     <element name="codiceEsito" type="xsd:int"/>
+     <element name="descrizioneEsito" nillable="true" type="xsd:string"/>
+     <element name="dettaglio" nillable="true" type="xsd:string"/>
+     <element name="timeStamp" nillable="true" type="xsd:dateTime"/>
+    </sequence>
+   </complexType>
+   <complexType name="Property">
+    <sequence>
+     <element name="key" nillable="true" type="xsd:string"/>
+     <element name="value" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="EventWS">
+    <sequence>
+     <element name="endDate" nillable="true" type="xsd:dateTime"/>
+     <element name="eventType" nillable="true" type="tns4:EventType"/>
+     <element name="id" type="xsd:long"/>
+     <element name="owner" nillable="true" type="tns4:Owner"/>
+     <element name="parameterId" nillable="true" type="xsd:string"/>
+     <element name="properties" nillable="true" type="impl:ArrayOf_tns4_nillable_Property"/>
+     <element name="reason" nillable="true" type="xsd:string"/>
+     <element name="startDate" nillable="true" type="xsd:dateTime"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema targetNamespace="http://messages.webservices.csp.mef.it" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://gestioneeventi.messages.webservices.csp.mef.it"/>
+   <import namespace="http://dto.webservices.csp.mef.it"/>
+   <import namespace="http://webservices.csp.eng.it"/>
+   <import namespace="http://event.system.mef.it"/>
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="GenericInMessage">
+    <sequence>
+     <element name="credenziali" nillable="true" type="tns3:Credenziali"/>
+    </sequence>
+   </complexType>
+   <complexType name="GenericOutMessage">
+    <sequence>
+     <element name="esitoOperazione" nillable="true" type="tns3:EsitoOperazione"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema targetNamespace="http://gestioneeventi.messages.webservices.csp.mef.it" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://messages.webservices.csp.mef.it"/>
+   <import namespace="http://dto.webservices.csp.mef.it"/>
+   <import namespace="http://webservices.csp.eng.it"/>
+   <import namespace="http://event.system.mef.it"/>
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="ListaTipiIn">
+    <complexContent>
+     <extension base="tns2:GenericInMessage">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="ListaTipiOut">
+    <complexContent>
+     <extension base="tns2:GenericOutMessage">
+      <sequence>
+       <element name="tipiEvento" nillable="true" type="impl:ArrayOf_tns5_nillable_EventType"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="ListaIn">
+    <complexContent>
+     <extension base="tns2:GenericInMessage">
+      <sequence>
+       <element name="listGenericEvents" type="xsd:boolean"/>
+       <element name="parameterId" nillable="true" type="xsd:string"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="ListaOut">
+    <complexContent>
+     <extension base="tns2:GenericOutMessage">
+      <sequence>
+       <element name="eventi" nillable="true" type="impl:ArrayOf_tns4_nillable_EventWS"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="CancellaIn">
+    <complexContent>
+     <extension base="tns2:GenericInMessage">
+      <sequence>
+       <element name="eventIds" nillable="true" type="impl:ArrayOf_xsd_long"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="CancellaOut">
+    <complexContent>
+     <extension base="tns2:GenericOutMessage">
+      <sequence>
+       <element name="deleted" nillable="true" type="impl:ArrayOf_xsd_boolean"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+  </schema>
+  <schema targetNamespace="http://event.system.mef.it" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://gestioneeventi.messages.webservices.csp.mef.it"/>
+   <import namespace="http://messages.webservices.csp.mef.it"/>
+   <import namespace="http://dto.webservices.csp.mef.it"/>
+   <import namespace="http://webservices.csp.eng.it"/>
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="EventType">
+    <sequence>
+     <element name="code" type="xsd:int"/>
+     <element name="description" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="Owner">
+    <sequence>
+     <element name="description" nillable="true" type="xsd:string"/>
+     <element name="idAmministrazione" nillable="true" type="xsd:string"/>
+     <element name="idSistema" type="xsd:int"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema targetNamespace="http://webservices.csp.eng.it" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://gestioneeventi.messages.webservices.csp.mef.it"/>
+   <import namespace="http://messages.webservices.csp.mef.it"/>
+   <import namespace="http://dto.webservices.csp.mef.it"/>
+   <import namespace="http://event.system.mef.it"/>
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="ArrayOf_tns5_nillable_EventType">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns4:EventType"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOf_tns4_nillable_Property">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns3:Property"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOf_tns4_nillable_EventWS">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns3:EventWS"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOf_xsd_long">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="xsd:long"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOf_xsd_boolean">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="xsd:boolean"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
 
-	<types>
-		<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-			xmlns="http://www.w3.org/2001/XMLSchema" xmlns:impl="http://webservices.csp.eng.it"
-			xmlns:intf="http://webservices.csp.eng.it" xmlns:s0="http://schemas.xmlsoap.org/wsdl/"
-			xmlns:s1="http://gestioneeventi.messages.webservices.csp.mef.it"
-			xmlns:s2="http://webservices.csp.eng.it" xmlns:s3="http://schemas.xmlsoap.org/wsdl/soap/"
-			xmlns:tns2="http://gestioneeventi.messages.webservices.csp.mef.it"
-			xmlns:tns3="http://messages.webservices.csp.mef.it" xmlns:tns4="http://dto.webservices.csp.mef.it"
-			xmlns:tns5="http://event.system.mef.it" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
-			xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/"
-			xmlns:wsi="http://ws-i.org/profiles/basic/1.1/xsd" targetNamespace="http://messages.webservices.csp.mef.it">
-			<xsd:import namespace="http://dto.webservices.csp.mef.it" />
-			<xsd:complexType name="GenericInMessage">
-				<xsd:sequence>
-					<xsd:element name="credenziali" nillable="true"
-						type="tns4:Credenziali" />
-				</xsd:sequence>
-			</xsd:complexType>
-			<xsd:complexType name="GenericOutMessage">
-				<xsd:sequence>
-					<xsd:element name="esitoOperazione" nillable="true"
-						type="tns4:EsitoOperazione" />
-				</xsd:sequence>
-			</xsd:complexType>
-		</xsd:schema>
-		<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-			xmlns="http://www.w3.org/2001/XMLSchema" xmlns:impl="http://webservices.csp.eng.it"
-			xmlns:intf="http://webservices.csp.eng.it" xmlns:s0="http://schemas.xmlsoap.org/wsdl/"
-			xmlns:s1="http://gestioneeventi.messages.webservices.csp.mef.it"
-			xmlns:s2="http://webservices.csp.eng.it" xmlns:s3="http://schemas.xmlsoap.org/wsdl/soap/"
-			xmlns:tns2="http://gestioneeventi.messages.webservices.csp.mef.it"
-			xmlns:tns3="http://messages.webservices.csp.mef.it" xmlns:tns4="http://dto.webservices.csp.mef.it"
-			xmlns:tns5="http://event.system.mef.it" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
-			xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/"
-			xmlns:wsi="http://ws-i.org/profiles/basic/1.1/xsd" targetNamespace="http://dto.webservices.csp.mef.it">
-			<xsd:import namespace="http://webservices.csp.eng.it" />
-			<xsd:import namespace="http://event.system.mef.it" />
-			<xsd:complexType name="Credenziali">
-				<xsd:sequence>
-					<xsd:element name="idAmministrazione" nillable="true"
-						type="xsd:string" />
-					<xsd:element name="idSistema" type="xsd:int" />
-					<xsd:element name="password" nillable="true" type="xsd:string" />
-				</xsd:sequence>
-			</xsd:complexType>
-			<xsd:complexType name="EsitoOperazione">
-				<xsd:sequence>
-					<xsd:element name="codiceEsito" type="xsd:int" />
-					<xsd:element name="descrizioneEsito" nillable="true"
-						type="xsd:string" />
-					<xsd:element name="dettaglio" nillable="true" type="xsd:string" />
-					<xsd:element name="timeStamp" nillable="true" type="xsd:dateTime" />
-				</xsd:sequence>
-			</xsd:complexType>
-			<xsd:complexType name="EventWS">
-				<xsd:sequence>
-					<xsd:element name="endDate" nillable="true" type="xsd:dateTime" />
-					<xsd:element name="eventType" nillable="true" type="tns5:EventType" />
-					<xsd:element name="id" type="xsd:long" />
-					<xsd:element name="owner" nillable="true" type="tns5:Owner" />
-					<xsd:element name="parameterId" nillable="true" type="xsd:string" />
-					<xsd:element name="properties" nillable="true"
-						type="impl:ArrayOf_tns4_nillable_Property" />
-					<xsd:element name="reason" nillable="true" type="xsd:string" />
-					<xsd:element name="startDate" nillable="true" type="xsd:dateTime" />
-				</xsd:sequence>
-			</xsd:complexType>
-			<xsd:complexType name="Property">
-				<xsd:sequence>
-					<xsd:element name="key" nillable="true" type="xsd:string" />
-					<xsd:element name="value" nillable="true" type="xsd:string" />
-				</xsd:sequence>
-			</xsd:complexType>
-		</xsd:schema>
-		<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-			xmlns="http://www.w3.org/2001/XMLSchema" xmlns:impl="http://webservices.csp.eng.it"
-			xmlns:intf="http://webservices.csp.eng.it" xmlns:s0="http://schemas.xmlsoap.org/wsdl/"
-			xmlns:s1="http://gestioneeventi.messages.webservices.csp.mef.it"
-			xmlns:s2="http://webservices.csp.eng.it" xmlns:s3="http://schemas.xmlsoap.org/wsdl/soap/"
-			xmlns:tns2="http://gestioneeventi.messages.webservices.csp.mef.it"
-			xmlns:tns3="http://messages.webservices.csp.mef.it" xmlns:tns4="http://dto.webservices.csp.mef.it"
-			xmlns:tns5="http://event.system.mef.it" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
-			xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/"
-			xmlns:wsi="http://ws-i.org/profiles/basic/1.1/xsd" targetNamespace="http://event.system.mef.it">
-			<xsd:complexType name="EventType">
-				<xsd:sequence>
-					<xsd:element name="code" type="xsd:int" />
-					<xsd:element name="description" nillable="true" type="xsd:string" />
-				</xsd:sequence>
-			</xsd:complexType>
-			<xsd:complexType name="Owner">
-				<xsd:sequence>
-					<xsd:element name="description" nillable="true" type="xsd:string" />
-					<xsd:element name="idAmministrazione" nillable="true"
-						type="xsd:string" />
-					<xsd:element name="idSistema" type="xsd:int" />
-				</xsd:sequence>
-			</xsd:complexType>
-		</xsd:schema>
-		<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-			xmlns="http://www.w3.org/2001/XMLSchema" xmlns:impl="http://webservices.csp.eng.it"
-			xmlns:intf="http://webservices.csp.eng.it" xmlns:s0="http://schemas.xmlsoap.org/wsdl/"
-			xmlns:s1="http://gestioneeventi.messages.webservices.csp.mef.it"
-			xmlns:s2="http://webservices.csp.eng.it" xmlns:s3="http://schemas.xmlsoap.org/wsdl/soap/"
-			xmlns:tns2="http://gestioneeventi.messages.webservices.csp.mef.it"
-			xmlns:tns3="http://messages.webservices.csp.mef.it" xmlns:tns4="http://dto.webservices.csp.mef.it"
-			xmlns:tns5="http://event.system.mef.it" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
-			xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/"
-			xmlns:wsi="http://ws-i.org/profiles/basic/1.1/xsd" targetNamespace="http://webservices.csp.eng.it">
-			<xsd:import namespace="http://dto.webservices.csp.mef.it" />
-			<xsd:import namespace="http://event.system.mef.it" />
-			<xsd:complexType name="ArrayOf_tns5_nillable_EventType">
-				<xsd:sequence>
-					<xsd:element maxOccurs="unbounded" minOccurs="0"
-						name="EventType" nillable="true" type="tns5:EventType" />
-				</xsd:sequence>
-			</xsd:complexType>
-			<xsd:complexType name="ArrayOf_tns4_nillable_Property">
-				<xsd:sequence>
-					<xsd:element maxOccurs="unbounded" minOccurs="0" name="Property"
-						nillable="true" type="tns4:Property" />
-				</xsd:sequence>
-			</xsd:complexType>
-			<xsd:complexType name="ArrayOf_tns4_nillable_EventWS">
-				<xsd:sequence>
-					<xsd:element maxOccurs="unbounded" minOccurs="0" name="EventWS"
-						nillable="true" type="tns4:EventWS" />
-				</xsd:sequence>
-			</xsd:complexType>
-			<xsd:complexType name="ArrayOf_xsd_long">
-				<xsd:sequence>
-					<xsd:element maxOccurs="unbounded" minOccurs="0" name="long"
-						type="xsd:long" />
-				</xsd:sequence>
-			</xsd:complexType>
-			<xsd:complexType name="ArrayOf_xsd_boolean">
-				<xsd:sequence>
-					<xsd:element maxOccurs="unbounded" minOccurs="0" name="boolean"
-						type="xsd:boolean" />
-				</xsd:sequence>
-			</xsd:complexType>
-		</xsd:schema>
-		<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-			xmlns="http://www.w3.org/2001/XMLSchema" xmlns:impl="http://webservices.csp.eng.it"
-			xmlns:intf="http://webservices.csp.eng.it" xmlns:s0="http://schemas.xmlsoap.org/wsdl/"
-			xmlns:s1="http://gestioneeventi.messages.webservices.csp.mef.it"
-			xmlns:s2="http://webservices.csp.eng.it" xmlns:s3="http://schemas.xmlsoap.org/wsdl/soap/"
-			xmlns:tns2="http://gestioneeventi.messages.webservices.csp.mef.it"
-			xmlns:tns3="http://messages.webservices.csp.mef.it" xmlns:tns4="http://dto.webservices.csp.mef.it"
-			xmlns:tns5="http://event.system.mef.it" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
-			xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/"
-			xmlns:wsi="http://ws-i.org/profiles/basic/1.1/xsd" targetNamespace="http://gestioneeventi.messages.webservices.csp.mef.it">
-			<xsd:import namespace="http://webservices.csp.eng.it" />
-			<xsd:import namespace="http://messages.webservices.csp.mef.it" />
-			<xsd:complexType name="ListaTipiIn">
-				<xsd:complexContent>
-					<xsd:extension base="tns3:GenericInMessage">
-						<xsd:sequence />
-					</xsd:extension>
-				</xsd:complexContent>
-			</xsd:complexType>
-			<xsd:element name="ListaTipiIn" nillable="true"
-				type="tns2:ListaTipiIn" />
-			<xsd:complexType name="ListaTipiOut">
-				<xsd:complexContent>
-					<xsd:extension base="tns3:GenericOutMessage">
-						<xsd:sequence>
-							<xsd:element name="tipiEvento" nillable="true"
-								type="impl:ArrayOf_tns5_nillable_EventType" />
-						</xsd:sequence>
-					</xsd:extension>
-				</xsd:complexContent>
-			</xsd:complexType>
-			<xsd:element name="ListaTipiOut" nillable="true"
-				type="tns2:ListaTipiOut" />
-			<xsd:complexType name="ListaIn">
-				<xsd:complexContent>
-					<xsd:extension base="tns3:GenericInMessage">
-						<xsd:sequence>
-							<xsd:element name="parameterId" nillable="true" type="xsd:string" />
-							<xsd:element name="listGenericEvents" type="xsd:boolean" />
-						</xsd:sequence>
-					</xsd:extension>
-				</xsd:complexContent>
-			</xsd:complexType>
-			<xsd:element name="ListaIn" nillable="true" type="tns2:ListaIn" />
-			<xsd:complexType name="ListaOut">
-				<xsd:complexContent>
-					<xsd:extension base="tns3:GenericOutMessage">
-						<xsd:sequence>
-							<xsd:element name="eventi" nillable="true"
-								type="impl:ArrayOf_tns4_nillable_EventWS" />
-						</xsd:sequence>
-					</xsd:extension>
-				</xsd:complexContent>
-			</xsd:complexType>
-			<xsd:element name="ListaOut" nillable="true" type="tns2:ListaOut" />
-			<xsd:complexType name="CancellaIn">
-				<xsd:complexContent>
-					<xsd:extension base="tns3:GenericInMessage">
-						<xsd:sequence>
-							<xsd:element name="eventIds" nillable="true"
-								type="impl:ArrayOf_xsd_long" />
-						</xsd:sequence>
-					</xsd:extension>
-				</xsd:complexContent>
-			</xsd:complexType>
-			<xsd:element name="CancellaIn" nillable="true" type="tns2:CancellaIn" />
-			<xsd:complexType name="CancellaOut">
-				<xsd:complexContent>
-					<xsd:extension base="tns3:GenericOutMessage">
-						<xsd:sequence>
-							<xsd:element name="deleted" nillable="true"
-								type="impl:ArrayOf_xsd_boolean" />
-						</xsd:sequence>
-					</xsd:extension>
-				</xsd:complexContent>
-			</xsd:complexType>
-			<xsd:element name="CancellaOut" nillable="true"
-				type="tns2:CancellaOut" />
-		</xsd:schema>
-	</types>
-	<message name="listaTipiResponse">
-		<part name="listaTipiReturn" type="s1:ListaTipiOut" />
-	</message>
-	<message name="listaRequest">
-		<part name="inMessage" type="s1:ListaIn" />
-	</message>
-	<message name="cancellaRequest">
-		<part name="inMessage" type="s1:CancellaIn" />
-	</message>
-	<message name="listaTipiRequest">
-		<part name="inMessage" type="s1:ListaTipiIn" />
-	</message>
-	<message name="cancellaResponse">
-		<part name="cancellaReturn" type="s1:CancellaOut" />
-	</message>
-	<message name="listaResponse">
-		<part name="listaReturn" type="s1:ListaOut" />
-	</message>
-	<portType name="GestioneEventi">
-		<operation name="listaTipi" parameterOrder="inMessage">
-			<input message="s2:listaTipiRequest" name="listaTipiRequest" />
-			<output message="s2:listaTipiResponse" name="listaTipiResponse" />
-		</operation>
-		<operation name="lista" parameterOrder="inMessage">
-			<input message="s2:listaRequest" name="listaRequest" />
-			<output message="s2:listaResponse" name="listaResponse" />
-		</operation>
-		<operation name="cancella" parameterOrder="inMessage">
-			<input message="s2:cancellaRequest" name="cancellaRequest" />
-			<output message="s2:cancellaResponse" name="cancellaResponse" />
-		</operation>
-	</portType>
-	<binding name="GestioneEventiSoapBinding" type="s2:GestioneEventi">
-		<wsaw:UsingAddressing xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
-			xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" wsdl:required="false" />
-		<s3:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http" />
-		<operation name="listaTipi">
-			<s3:operation soapAction="listaTipi" />
-			<input name="listaTipiRequest">
-				<s3:body namespace="http://webservices.csp.eng.it" use="literal" />
-			</input>
-			<output name="listaTipiResponse">
-				<s3:body namespace="http://webservices.csp.eng.it" use="literal" />
-			</output>
-		</operation>
-		<operation name="lista">
-			<s3:operation soapAction="lista" />
-			<input name="listaRequest">
-				<s3:body namespace="http://webservices.csp.eng.it" use="literal" />
-			</input>
-			<output name="listaResponse">
-				<s3:body namespace="http://webservices.csp.eng.it" use="literal" />
-			</output>
-		</operation>
-		<operation name="cancella">
-			<s3:operation soapAction="cancella" />
-			<input name="cancellaRequest">
-				<s3:body namespace="http://webservices.csp.eng.it" use="literal" />
-			</input>
-			<output name="cancellaResponse">
-				<s3:body namespace="http://webservices.csp.eng.it" use="literal" />
-			</output>
-		</operation>
-	</binding>
-	<service name="GestioneEventiSoapBindingQSService">
-		<port binding="s2:GestioneEventiSoapBinding" name="GestioneEventiSoapBindingQSPort">
-			<s3:address
-				location="https://ministeroeconomiafinanze.spcoop.gov.it/openspcoop/PA/MEF/IGRUE_COLLOQUIOSISTEMILOCALI_GESTIONEEVENTI_1" />
-		</port>
-	</service>
-</definitions>
+   <wsdl:message name="listaTipiResponse">
+
+      <wsdl:part name="listaTipiReturn" type="tns1:ListaTipiOut">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="cancellaRequest">
+
+      <wsdl:part name="inMessage" type="tns1:CancellaIn">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="listaRequest">
+
+      <wsdl:part name="inMessage" type="tns1:ListaIn">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="listaTipiRequest">
+
+      <wsdl:part name="inMessage" type="tns1:ListaTipiIn">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="cancellaResponse">
+
+      <wsdl:part name="cancellaReturn" type="tns1:CancellaOut">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="listaResponse">
+
+      <wsdl:part name="listaReturn" type="tns1:ListaOut">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="GestioneEventi">
+
+      <wsdl:operation name="listaTipi" parameterOrder="inMessage">
+
+         <wsdl:input message="impl:listaTipiRequest" name="listaTipiRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:listaTipiResponse" name="listaTipiResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="lista" parameterOrder="inMessage">
+
+         <wsdl:input message="impl:listaRequest" name="listaRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:listaResponse" name="listaResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="cancella" parameterOrder="inMessage">
+
+         <wsdl:input message="impl:cancellaRequest" name="cancellaRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:cancellaResponse" name="cancellaResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="GestioneEventiSoapBinding" type="impl:GestioneEventi">
+
+      <wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="listaTipi">
+
+         <wsdlsoap:operation soapAction="listaTipi"/>
+
+         <wsdl:input name="listaTipiRequest">
+
+            <wsdlsoap:body namespace="http://webservices.csp.eng.it" use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="listaTipiResponse">
+
+            <wsdlsoap:body namespace="http://webservices.csp.eng.it" use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="lista">
+
+         <wsdlsoap:operation soapAction="lista"/>
+
+         <wsdl:input name="listaRequest">
+
+            <wsdlsoap:body namespace="http://webservices.csp.eng.it" use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="listaResponse">
+
+            <wsdlsoap:body namespace="http://webservices.csp.eng.it" use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="cancella">
+
+         <wsdlsoap:operation soapAction="cancella"/>
+
+         <wsdl:input name="cancellaRequest">
+
+            <wsdlsoap:body namespace="http://webservices.csp.eng.it" use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="cancellaResponse">
+
+            <wsdlsoap:body namespace="http://webservices.csp.eng.it" use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="GestioneEventiService">
+
+      <wsdl:port binding="impl:GestioneEventiSoapBinding" name="GestioneEventi">
+
+         <wsdlsoap:address location="http://igruesrv.tesoro.it/CPSWeb/services/GestioneEventi"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
