@@ -294,7 +294,12 @@ public class IgrueImpl implements Igrue {
 	    	FileOutputStream fos = null;
 	    	newZip.createNewFile();
 			fos = new FileOutputStream(newZip);
-			fos.write(bytes);
+			if (bytes != null) {
+				fos.write(bytes);
+			}
+			else {
+				throw new Exception("File non allegato o non valido");
+			}
 			fos.close();
 			
 			SendDatiAttuazioneResponse response = new SendDatiAttuazioneResponse();
@@ -321,7 +326,7 @@ public class IgrueImpl implements Igrue {
 			it.mef.csp.webservices.dto.Credenziali c = new it.mef.csp.webservices.dto.Credenziali();
 			c.setIdAmministrazione(credenziali.getIdAmministrazione());
 			c.setIdSistema(credenziali.getIdSistema());
-			c.setPassword(credenziali.getPassword());
+//			c.setPassword(credenziali.getPassword());
 			in.setCredenziali(c);
 			in.setProtocollo(10);
 
