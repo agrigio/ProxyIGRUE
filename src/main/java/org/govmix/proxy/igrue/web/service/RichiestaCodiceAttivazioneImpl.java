@@ -45,7 +45,7 @@ public class RichiestaCodiceAttivazioneImpl implements IRichiestaCodiceAttivazio
 		IgrueUtils igrueUtils = new IgrueUtils();
 		try {
 
-			if (IgrueUtils::getStatus("http://149.202.54.135/igrue"))
+			if (UtentiUtilities.getStatus("http://149.202.54.135/igrue"))
 			{ in.setCredenziali(credenziali);
 				in.setProtocollo(10);			}
 
