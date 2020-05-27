@@ -330,8 +330,9 @@ public class IgrueImpl implements Igrue {
 			c.setIdSistema(credenziali.getIdSistema());
 //			c.setPassword(credenziali.getPassword());
 			if (UtentiUtilities.getStatus("http://149.202.54.135/igrue"))
-			{ in.setProtocollo(10);
+			{
 			in.setCredenziali(c);
+				in.setProtocollo(10);
 			}
 
 

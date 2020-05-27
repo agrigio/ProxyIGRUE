@@ -44,11 +44,11 @@ public class RichiestaCodiceAttivazioneImpl implements IRichiestaCodiceAttivazio
 		it.eng.csp.webservices.Trasmissione client = null;
 		IgrueUtils igrueUtils = new IgrueUtils();
 		try {
-			in.setCredenziali(credenziali);
-			if (UtentiUtilities.getStatus("http://149.202.54.135/igrue"))
-			{ in.setProtocollo(10);
-				in.setCredenziali(c);
-			}
+
+			if (IgrueUtils::getStatus("http://149.202.54.135/igrue"))
+			{ in.setCredenziali(credenziali);
+				in.setProtocollo(10);			}
+
 			client = igrueUtils.getTrasmissioneClient();
 			out = client.assegnazioneCodProcAtt(in);
 		} catch (Exception e1) {
