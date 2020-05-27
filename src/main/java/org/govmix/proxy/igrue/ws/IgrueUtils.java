@@ -21,7 +21,7 @@
  */
 package org.govmix.proxy.igrue.ws;
 
-
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import it.eng.csp.webservices.EsitoElaborazione;
 import it.eng.csp.webservices.EsitoElaborazioneSoapBindingQSService;
 import it.eng.csp.webservices.GestioneEventi;
@@ -84,8 +84,8 @@ import org.openspcoop2.generic_project.expression.IPaginatedExpression;
 import org.w3c.dom.Node;
 
 public class IgrueUtils {
-	
-	
+
+
 	private static Marshaller marshaller;
 	private static EsitoElaborazione esitoElaborazioneClient;
 	private static GestioneEventi gestioneEventiClient;

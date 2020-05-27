@@ -23,6 +23,9 @@ package org.govmix.proxy.igrue.web.ejb.utils;
 
 import it.mef.csp.webservices.dto.Credenziali;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -81,6 +84,26 @@ public class UtentiUtilities {
 		return _getDir(Configuration.CONTESTO, utente);
 	}
 
+	public static Boolean getStatus(String url) throws IOException {
+
+		Boolean result = false;
+		try {
+			URL urlObj = new URL(url);
+			HttpURLConnection con = (HttpURLConnection) urlObj.openConnection();
+			con.setRequestMethod("GET");
+			// Set connection timeout
+			con.setConnectTimeout(3000);
+			con.connect();
+
+			int code = con.getResponseCode();
+			if (code == 200) {
+				result = true;
+			}
+		} catch (Exception e) {
+			result = false;
+		}
+		return result;
+	}
 	public static Utente getUtente() {
 		FacesContext fc = FacesContext.getCurrentInstance();
 		if(fc!= null){

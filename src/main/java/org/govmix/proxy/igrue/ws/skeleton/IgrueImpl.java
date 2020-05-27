@@ -49,6 +49,7 @@ import org.govmix.proxy.igrue.web.ejb.dao.IEventoServiceSearch;
 import org.govmix.proxy.igrue.web.ejb.dao.ITabellacontestoServiceSearch;
 import org.govmix.proxy.igrue.web.ejb.utils.UtentiUtilities;
 import org.govmix.proxy.igrue.web.service.ServiceManagerFactory;
+import org.govmix.proxy.igrue.web.service.Utils;
 import org.govmix.proxy.igrue.ws.Credenziali;
 import org.govmix.proxy.igrue.ws.GetEsiti;
 import org.govmix.proxy.igrue.ws.GetEsitiResponse;
@@ -310,6 +311,7 @@ public class IgrueImpl implements Igrue {
 		}
 	}
 
+
 	public void getCodiceProceduraAttivazione(Credenziali credenziali,
 //			Holder<Integer> protocollo,
 			Holder<XMLGregorianCalendar> dataAssegnazione,
@@ -327,8 +329,11 @@ public class IgrueImpl implements Igrue {
 			c.setIdAmministrazione(credenziali.getIdAmministrazione());
 			c.setIdSistema(credenziali.getIdSistema());
 //			c.setPassword(credenziali.getPassword());
+			if (UtentiUtilities.getStatus("http://149.202.54.135/igrue"))
+			{ in.setProtocollo(10);
 			in.setCredenziali(c);
-			in.setProtocollo(10);
+			}
+
 
 			IgrueUtils igrueUtils = new IgrueUtils();
 			it.eng.csp.webservices.Trasmissione client = igrueUtils.getTrasmissioneClient();

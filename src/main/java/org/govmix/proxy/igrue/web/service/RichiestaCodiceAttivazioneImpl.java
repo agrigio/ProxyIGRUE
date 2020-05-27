@@ -45,7 +45,10 @@ public class RichiestaCodiceAttivazioneImpl implements IRichiestaCodiceAttivazio
 		IgrueUtils igrueUtils = new IgrueUtils();
 		try {
 			in.setCredenziali(credenziali);
-			in.setProtocollo(10);
+			if (UtentiUtilities.getStatus("http://149.202.54.135/igrue"))
+			{ in.setProtocollo(10);
+				in.setCredenziali(c);
+			}
 			client = igrueUtils.getTrasmissioneClient();
 			out = client.assegnazioneCodProcAtt(in);
 		} catch (Exception e1) {
